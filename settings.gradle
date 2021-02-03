@@ -8,5 +8,5 @@
  */
 
 def prefixUsername = "00-Untitled"
-def projectName = "-Blank_Gradle_Project"
+def projectName = "-PTP-UD[5-6]"
 rootProject.name = prefixUsername + projectName
