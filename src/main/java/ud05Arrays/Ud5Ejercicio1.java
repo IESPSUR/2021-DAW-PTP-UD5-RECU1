@@ -55,13 +55,7 @@ public class Ud5Ejercicio1 {
 	 * @return Nuevo array con las Bolas creadas.
 	 */
 	public static Bola[] crearBolas(float[][] datosBolas) {
-		Bola[] bolas = new Bola[datosBolas.length];
-		
-		for (int i = 0; i < datosBolas.length; i++) {
-			bolas[i]=new Bola(datosBolas[i][0],datosBolas[i][1]);
-		}
-		
-		return bolas;
+		return null;
 	}
 	
 
@@ -77,9 +71,7 @@ public class Ud5Ejercicio1 {
 		System.out.println(titulo + ": --------------------");
 		
 		//TODO sobrescribe el comentario para hacer lo que el metodo pide
-		for (Bola bola : array) {
-			System.out.println(bola);
-		}
+		
 		System.out.println("-----------------------------");
 	}
 	
@@ -96,17 +88,8 @@ public class Ud5Ejercicio1 {
 	 * @return copia ordenada del array pasado como parametro
 	 */
 	public static Bola[] ordena(final Bola[] array) {
-		Bola []copia = array.clone();
 		
-		for (int i = 0; i < copia.length-1; i++) {
-			for (int j = i+1; j < copia.length; j++) {
-				if(copia[i].compareTo(copia[j])<0) {
-					Helper.swap(copia, i, j);
-				}
-			}
-		}
-		
-		return copia;
+		return null;
 	}
 	
 	/**
@@ -125,27 +108,7 @@ public class Ud5Ejercicio1 {
 	 * @return nuevo array con los elementos no eliminados.
 	 */
 	public static Bola[] eliminaBolas(float diametro, float peso,final Bola[] array) {
-		Bola []copia = array.clone();
-		Bola referencia = new Bola(diametro, peso);
-		
-		int eliminadas=0;
-		for (int i = 0; i < copia.length; i++) {
-			if(referencia.equals(copia[i])) {
-				copia[i]=null;
-				eliminadas++;
-			}
-		}
-		
-		Bola []nuevo = new Bola[copia.length-eliminadas];
-		
-		int i = 0;
-		for(Bola bola: copia) {
-			if(bola!=null)
-				nuevo[i++]=bola;
-		}
-		
-		
-		return nuevo;
+		return null;
 	}
 	
 	
