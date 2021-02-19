@@ -35,5 +35,22 @@ public class Aleatorios {
 	public static int numeroAleatorio(int min, int max) {
 		return r.nextInt((max-min)+1)+min;
 	}
+	
+	public static float numeroAleatorio(float min, float max) {
+		return r.nextFloat()*(max - min) + min;
+	}
+	
+	public static float [][] arrayFloat(int rows, int cols, float min, float max){
+		float [][] array = new float[rows][cols];
+		
+		for (int i = 0; i < array.length; i++) {
+			float[] fs = array[i];
+			for (int j = 0; j < fs.length; j++) {
+				 fs[j]=numeroAleatorio(min,max);
+				
+			}
+		}
+		return array;
+	}
 
 }

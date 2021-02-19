@@ -4,10 +4,16 @@
 package clases;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +21,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.MethodName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+
+import clases.helpers.Aleatorios;
+import ud05Arrays.Bola;
+import ud05Arrays.Ud5Ejercicio1;
 
 /**
  * Esta clase esta preparada para testear el programa main principal de un proyecto
@@ -45,16 +55,92 @@ class MainTest {
 	}
 	
 	@Test
-	@DisplayName("Hola Mundo")
+	@DisplayName("Crear Bolas")
 	/**
 	 * toString
 	 */
-	void test01() {
+	void test01CrearBolas() {
+		//InputStream salida = new ByteArrayInputStream(outputStreamCaptor.toByteArray());
 		//Scanner lectorSalida = new Scanner(salida);
-		Main.main(null);
-		assertEquals("Hola Mundo", outputStreamCaptor.toString().trim()/*lectorSalida.nextLine()*/);
+		//Main.main(null);
+		//assertEquals("Hola Mundo", outputStreamCaptor.toString().trim()/*lectorSalida.nextLine()*/);
 		//lectorSalida.close();
+		int rows= Aleatorios.numeroAleatorio(5, 50);
+		float [][] datosBolas = Aleatorios.arrayFloat(rows, 2, 1f, 10f); 
+			
+		Bola [] array = Ud5Ejercicio1.crearBolas(datosBolas);
+		
+		assertEquals(datosBolas.length, array.length);
+		
+		for(int i=0;i<datosBolas.length;i++) {
+			float [] fs = datosBolas[i];
+			Bola ref = new Bola(fs[0],fs[1]);
+			assertEquals(ref, array[i]);
+		}
+		
 	}
+	
+	@Test
+	@DisplayName("Imprimir Array Bolas")
+	/**
+	 * toString
+	 */
+	void test02ImprimeArrayBolas() {
+		
+
+		int s = Aleatorios.numeroAleatorio(8, 15);
+		Bola [] array = new Bola[s];
+		
+		for (int i = 0; i < array.length; i++)
+			array[i]=new Bola(Aleatorios.numeroAleatorio(1f, 9f),Aleatorios.numeroAleatorio(1f, 9f));
+		String titulo = Aleatorios.cadenaAleatoria(5, 8);
+		Ud5Ejercicio1.imprimeBolas(array, titulo);
+		
+		InputStream salida = new ByteArrayInputStream(outputStreamCaptor.toByteArray());
+		Scanner lectorSalida = new Scanner(salida);
+				
+		int lines=0;
+		assertEquals(lectorSalida.nextLine(), titulo + ": --------------------");
+		lines++;
+		
+		for(Bola b: array) {
+			assertEquals(lectorSalida.nextLine(), b.toString());
+			lines++;
+		}
+		
+		assertEquals(lectorSalida.nextLine(), "-----------------------------");
+		lines++;
+		lectorSalida.close();
+		assertEquals(array.length+2,lines);
+	}
+	
+	
+	@Test
+	@DisplayName("Imprimir Array Bolas")
+	/**
+	 * toString
+	 */
+	void test03OrdenDescendente() {
+		
+
+		int s = Aleatorios.numeroAleatorio(8, 15);
+		Bola [] array = new Bola[s];
+		
+		for (int i = 0; i < array.length; i++)
+			array[i]=new Bola(Aleatorios.numeroAleatorio(1f, 9f),Aleatorios.numeroAleatorio(1f, 9f));
+		
+		Bola [] b = array.clone();
+		
+		Bola [] ordenado = Ud5Ejercicio1.ordena(array);
+		//El contenido de array no ha sido modificado
+		assertTrue(Arrays.deepEquals(b, array));
+		//El array devuelto es diferente
+		assertNotEquals(ordenado, array);
+		//El array está ordenado
+		Arrays.sort(b, Collections.reverseOrder());
+		assertTrue(Arrays.deepEquals(ordenado, b));
+	}
+	
 
 	@AfterEach
 	void tearDown() {
