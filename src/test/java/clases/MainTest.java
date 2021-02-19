@@ -141,6 +141,65 @@ class MainTest {
 		assertTrue(Arrays.deepEquals(ordenado, b));
 	}
 	
+	@Test
+	@DisplayName("Imprimir Array Bolas")
+	/**
+	 * toString
+	 */
+	void test04EliminaBolas() {
+		
+
+		int s = Aleatorios.numeroAleatorio(8, 15);
+		Bola [] array = new Bola[s+3];
+		
+		Bola otra = new Bola(3f,3f);
+		array[0]=otra;
+		for (int i = 1; i < array.length-2; i++)
+			array[i]=new Bola(Aleatorios.numeroAleatorio(1f, 9f),Aleatorios.numeroAleatorio(1f, 9f));
+		
+		array[array.length-2]=otra;
+		array[array.length-1]=otra;
+		
+		Bola [] b = array.clone();
+		
+		eliminaElemento(3f, 3f, b);
+		
+		int elementoAleatorio = Aleatorios.numeroAleatorio(0, array.length-1);
+		
+		Bola bola2 = array[elementoAleatorio];
+		
+		eliminaElemento(bola2.getDiametro(), bola2.getPeso(), b);
+	}
+	
+	void eliminaElemento(float diametro, float peso, Bola[]array) {
+		
+		Bola otra = new Bola(diametro, peso);
+        Bola [] b = array.clone();
+		
+		int  cuenta = 0;
+		
+		for(Bola pru: array) {
+			if(pru.equals(otra))
+				cuenta++;
+		}
+		
+		Bola [] eliminacion1 = Ud5Ejercicio1.eliminaBolas(diametro, peso, array);
+		//El contenido de array no ha sido modificado
+		assertTrue(Arrays.deepEquals(b, array));
+		//El array devuelto es diferente
+		assertNotEquals(eliminacion1, array);
+		//La longitud del array devuelto es coherente
+		assertEquals(array.length - cuenta, eliminacion1.length);
+		//Comprobar que el eliminado no esta
+		Arrays.sort(eliminacion1);
+		assertTrue(Arrays.binarySearch(eliminacion1, otra)<0);
+		//Comprobar  que los no eliminados estan
+		for(Bola ref: array) {
+			if(!ref.equals(otra))
+				assertTrue(Arrays.binarySearch(eliminacion1, ref)>=0);
+		}
+	}
+	
 
 	@AfterEach
 	void tearDown() {

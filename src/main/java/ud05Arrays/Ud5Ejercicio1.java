@@ -110,11 +110,19 @@ public class Ud5Ejercicio1 {
 	}
 	
 	/**
-	 * Elimina todas las veces que aparece la bola en un array
-	 * @param diametro
-	 * @param peso
-	 * @param array
-	 * @return
+	 * Elimina todas las veces que aparece la bola en un array.
+	 * 
+	 * Debe devolver un nuevo arrar mas pequeño que se ajuste
+	 * perfectamente a los elementos que quedan tras la eliminacion
+	 * 
+	 * RECUERDA QUE EL METODO TRABAJA SOBRE UNA COPIA
+	 * NO DEBE MODIFICAR EL ARRAY ORIGINAL.
+	 * PISTA: Clona el array antes de eliminar.
+	 * 
+	 * @param diametro del elemento a borrar
+	 * @param peso del elemento a borrar
+	 * @param array array que se clonara y del que se borrara
+	 * @return nuevo array con los elementos no eliminados.
 	 */
 	public static Bola[] eliminaBolas(float diametro, float peso,final Bola[] array) {
 		Bola []copia = array.clone();
