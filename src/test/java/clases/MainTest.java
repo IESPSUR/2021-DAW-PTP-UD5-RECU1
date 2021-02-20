@@ -25,6 +25,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import clases.helpers.Aleatorios;
 import ud05Arrays.Bola;
 import ud05Arrays.Ud5Ejercicio1;
+import ud05Arrays.Ud5Ejercicio2;
 
 /**
  * Esta clase esta preparada para testear el programa main principal de un proyecto
@@ -201,6 +202,59 @@ class MainTest {
 	}
 	
 
+	@Test
+	@DisplayName("Fibo")
+	/**
+	 * toString
+	 */
+	void test06Fibo() {
+		assertEquals(0,  Ud5Ejercicio2.fibo(0));
+		assertEquals(1,  Ud5Ejercicio2.fibo(1));
+		assertEquals(1,  Ud5Ejercicio2.fibo(2));
+		assertEquals(2,  Ud5Ejercicio2.fibo(3));
+		assertEquals(3,  Ud5Ejercicio2.fibo(4));
+		assertEquals(5,  Ud5Ejercicio2.fibo(5));
+		
+		int enesimo = Aleatorios.numeroAleatorio(20, 40);
+		
+		long prev=5;
+		long first=3;
+		long valor=0;
+		for(int i = 6; i <= enesimo;i++) {
+			valor = prev +first;
+			first=prev;
+			prev=valor;
+			
+		}
+		assertEquals(valor,  Ud5Ejercicio2.fibo(enesimo));
+	}
+	
+	@Test
+	@DisplayName("Fibonacci")
+	/**
+	 * toString
+	 */
+	void test07Fibo() {
+	
+		long [] tab = new long[41];
+		
+		
+		tab[0]=0;
+		assertEquals(1,Ud5Ejercicio2.fibonacci(1).length);
+		assertTrue(Arrays.equals(Ud5Ejercicio2.fibonacci(1), 0,1,tab,0,1));
+		tab[1]=1;
+		assertEquals(2,Ud5Ejercicio2.fibonacci(2).length);
+		assertTrue(Arrays.equals(Ud5Ejercicio2.fibonacci(2), 0,2,tab,0,2));
+		
+		for(int i = 2; i < tab.length;i++) { 
+			tab[i] = tab[i-2]+tab[i-1];
+			long [] fiboDev = Ud5Ejercicio2.fibonacci(i);
+			assertEquals(i,fiboDev.length);
+			assertTrue(Arrays.equals(fiboDev, 0,i,tab,0,i));
+		}
+		
+	}
+	
 	@AfterEach
 	void tearDown() {
 	    System.setOut(standardOut);
