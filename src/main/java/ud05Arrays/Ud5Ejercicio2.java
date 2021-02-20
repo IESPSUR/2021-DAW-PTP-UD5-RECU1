@@ -19,9 +19,9 @@ public class Ud5Ejercicio2 {
 	public static void main(String[] args) {
 		int numTerminos = Integer.parseInt(args[0]);
 		
-		int[] sucesion = fibonacci(numTerminos);
+		long[] sucesion = fibonacci(numTerminos);
 		
-		for (int i : sucesion)
+		for (long i : sucesion)
 			System.out.print(i + " ");
 	}
 	
@@ -36,8 +36,8 @@ public class Ud5Ejercicio2 {
 	 * @param terminos longitud del array
 	 * @return el array con todos los terminos de fibonacci calculados para cada posicion
 	 */
-	public static int [] fibonacci (int terminos) {
-		int [] resultado = new int[terminos];
+	public static long [] fibonacci (int terminos) {
+		long [] resultado = new long[terminos];
 		
 		for (int i = 0; i < resultado.length; i++)
 			resultado[i]=fibo(i);
@@ -56,8 +56,8 @@ public class Ud5Ejercicio2 {
 	 * @param enesimo termino de Fibonacci a calcular
 	 * @return valor del termino en la sucesion de Fibonacci
 	 */
-	public static int fibo(int enesimo) {
-		int valor=0;
+	public static long fibo(int enesimo) {
+		long valor=0;
 		
 		if(enesimo==1)
 			valor=1;
