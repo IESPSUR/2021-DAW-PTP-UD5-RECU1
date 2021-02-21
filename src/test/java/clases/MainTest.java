@@ -117,7 +117,7 @@ class MainTest {
 	
 	
 	@Test
-	@DisplayName("Imprimir Array Bolas")
+	@DisplayName("Orden Desdendente")
 	/**
 	 * toString
 	 */
@@ -143,7 +143,7 @@ class MainTest {
 	}
 	
 	@Test
-	@DisplayName("Imprimir Array Bolas")
+	@DisplayName("Eliminacion elementos")
 	/**
 	 * toString
 	 */
