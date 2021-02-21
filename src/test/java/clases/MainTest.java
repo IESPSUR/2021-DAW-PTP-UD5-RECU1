@@ -207,7 +207,7 @@ class MainTest {
 	/**
 	 * toString
 	 */
-	void test06Fibo() {
+	void test05Fibo() {
 		assertEquals(0,  Ud5Ejercicio2.fibo(0));
 		assertEquals(1,  Ud5Ejercicio2.fibo(1));
 		assertEquals(1,  Ud5Ejercicio2.fibo(2));
@@ -234,7 +234,7 @@ class MainTest {
 	/**
 	 * toString
 	 */
-	void test07Fibo() {
+	void test06Fibonacci() {
 	
 		long [] tab = new long[41];
 		
