@@ -1,4 +1,4 @@
-package ud05Arrays;
+package ud05arrays;
 
 public class Bola implements Comparable<Bola> {
 	

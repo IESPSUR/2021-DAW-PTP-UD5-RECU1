@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ud05Arrays;
+package ud05arrays;
 
 import helpers.Helper;
 
@@ -41,7 +41,6 @@ public class Ud5Ejercicio1 {
 		Bola [] limpio = eliminaBolas(5f, 5f, bolas);
 		
 		imprimeBolas(limpio,"Limpio");
-
 	}
 	
 	/**
@@ -104,6 +103,7 @@ public class Ud5Ejercicio1 {
 			}
 		}
 		
+				
 		return copia;
 	}
 	

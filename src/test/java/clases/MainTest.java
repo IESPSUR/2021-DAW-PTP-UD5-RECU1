@@ -9,11 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,10 +26,13 @@ import org.junit.jupiter.api.MethodOrderer.MethodName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.JavaSource;
+
 import clases.helpers.Aleatorios;
-import ud05Arrays.Bola;
-import ud05Arrays.Ud5Ejercicio1;
-import ud05Arrays.Ud5Ejercicio2;
+import ud05arrays.Bola;
+import ud05arrays.Ud5Ejercicio1;
+import ud05arrays.Ud5Ejercicio2;
 
 /**
  * Esta clase esta preparada para testear el programa main principal de un proyecto
@@ -123,6 +130,7 @@ class MainTest {
 	 */
 	void test03OrdenDescendente() {
 		
+		prohibidoArrays();
 
 		int s = Aleatorios.numeroAleatorio(8, 15);
 		Bola [] array = new Bola[s];
@@ -149,7 +157,8 @@ class MainTest {
 	 */
 	void test04EliminaBolas() {
 		
-
+		prohibidoArrays();
+		
 		int s = Aleatorios.numeroAleatorio(8, 15);
 		Bola [] array = new Bola[s+3];
 		
@@ -260,5 +269,37 @@ class MainTest {
 	    System.setOut(standardOut);
 	}
 	
+	void prohibidoArrays() {
+		String fileFullPath = "src/main/java/ud05arrays/Ud5Ejercicio1.java";
+		compruebaProhibido(fileFullPath, "Arrays");
+	}
+	
+	void compruebaProhibido(String classFullPath, String classForbidden) {
+        JavaDocBuilder builder = new JavaDocBuilder();
+        try {
+			builder.addSource(new FileReader( classFullPath  ));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			assertTrue(false);
+		}
+
+        JavaSource src = builder.getSources()[0];
+        String[] imports = src.getImports();
+
+        for ( String imp : imports )
+        {
+            if(imp.endsWith("."+ classForbidden) || imp.endsWith(".*"))
+            	assertTrue(false);
+        }
+        
+        String sc = src.getCodeBlock();
+        
+        Pattern pattern = Pattern.compile(classForbidden + "\\.");
+        Matcher matcher = pattern.matcher(sc);
+        if(matcher.find())
+        	assertTrue(false);
+	}
+	
+
 
 }
