@@ -47,6 +47,7 @@ class MainTest {
 	private final PrintStream standardOut = System.out;
 	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 	
+	
 	@BeforeEach
 	void setUp() {
 	    System.setOut(new PrintStream(outputStreamCaptor));
@@ -288,18 +289,28 @@ class MainTest {
 
         for ( String imp : imports )
         {
-            if(imp.endsWith("."+ classForbidden) || imp.endsWith(".*"))
+            if(imp.endsWith("."+ classForbidden)) {
+            	print("Prohibido importar " + classForbidden + " en la clase " + classFullPath );
             	assertTrue(false);
+            }
+            if( imp.endsWith(".*")) {
+            	print("Prohibido importar con .*" + " en la clase " + classFullPath );
+            	assertTrue(false);
+            }
         }
         
         String sc = src.getCodeBlock();
         
         Pattern pattern = Pattern.compile(classForbidden + "\\.");
         Matcher matcher = pattern.matcher(sc);
-        if(matcher.find())
+        if(matcher.find()) {
+        	print("Prohibido referenciar " + classForbidden + " en la clase " + classFullPath );
         	assertTrue(false);
+        }
 	}
 	
-
+	void print(Object message) {
+		this.standardOut.println(message);
+	}
 
 }
