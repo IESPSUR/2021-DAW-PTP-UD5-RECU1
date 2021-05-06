@@ -33,6 +33,7 @@ import clases.helpers.Aleatorios;
 import ud05arrays.Bola;
 import ud05arrays.Ud5Ejercicio1;
 import ud05arrays.Ud5Ejercicio2;
+import ud05arrays.Virus;
 
 /**
  * Esta clase esta preparada para testear el programa main principal de un proyecto
@@ -64,46 +65,61 @@ class MainTest {
 	}
 	
 	@Test
-	@DisplayName("Crear Bolas")
+	@DisplayName("Crear Virus")
 	/**
 	 * toString
 	 */
-	void test01CrearBolas() {
+	void test01() {
 		//InputStream salida = new ByteArrayInputStream(outputStreamCaptor.toByteArray());
 		//Scanner lectorSalida = new Scanner(salida);
 		//Main.main(null);
 		//assertEquals("Hola Mundo", outputStreamCaptor.toString().trim()/*lectorSalida.nextLine()*/);
 		//lectorSalida.close();
 		int rows= Aleatorios.numeroAleatorio(5, 50);
-		float [][] datosBolas = Aleatorios.arrayFloat(rows, 2, 1f, 10f); 
+		Object [][] datos = arrayVirus(rows); 
 			
-		Bola [] array = Ud5Ejercicio1.crearBolas(datosBolas);
+		Virus [] array = Ud5Ejercicio1.crearArrayVirus(datos);
 		
-		assertEquals(datosBolas.length, array.length);
+		assertEquals(datos.length, array.length);
 		
-		for(int i=0;i<datosBolas.length;i++) {
-			float [] fs = datosBolas[i];
-			Bola ref = new Bola(fs[0],fs[1]);
+		for(int i=0;i<datos.length;i++) {
+			Object [] fs = datos[i];
+			Virus ref = new Virus((String)fs[0],(Integer)fs[1],(Float)fs[2]);
 			assertEquals(ref, array[i]);
 		}
 		
 	}
 	
+	private Object [][] arrayVirus(int rows){
+		Object [][] array = new Object[rows][3];
+		
+		for (int i = 0; i < array.length; i++) {
+			Object[] fs = array[i];
+			fs[0] = Aleatorios.cadenaAleatoria(3, 6);
+			fs[1] = Aleatorios.numeroAleatorio(1, 12);
+			fs[2] = Aleatorios.numeroAleatorio(0f, 0.999999999f);
+		}
+		return array;
+	}
+	
 	@Test
-	@DisplayName("Imprimir Array Bolas")
+	@DisplayName("Imprimir Array Virus")
 	/**
 	 * toString
 	 */
-	void test02ImprimeArrayBolas() {
+	void test02() {
 		
 
 		int s = Aleatorios.numeroAleatorio(8, 15);
-		Bola [] array = new Bola[s];
+		Virus [] array = new Virus[s];
 		
 		for (int i = 0; i < array.length; i++)
-			array[i]=new Bola(Aleatorios.numeroAleatorio(1f, 9f),Aleatorios.numeroAleatorio(1f, 9f));
+			array[i]=new Virus(Aleatorios.cadenaAleatoria(3, 6),Aleatorios.numeroAleatorio(1, 12),Aleatorios.numeroAleatorio(0f, 0.999999999f));
+		
 		String titulo = Aleatorios.cadenaAleatoria(5, 8);
-		Ud5Ejercicio1.imprimeBolas(array, titulo);
+		
+		Ud5Ejercicio1.imprimeVirus(array, titulo, true);
+		Ud5Ejercicio1.imprimeVirus(array, titulo, false);
 		
 		InputStream salida = new ByteArrayInputStream(outputStreamCaptor.toByteArray());
 		Scanner lectorSalida = new Scanner(salida);
@@ -112,15 +128,25 @@ class MainTest {
 		assertEquals(lectorSalida.nextLine(), titulo + ": --------------------");
 		lines++;
 		
-		for(Bola b: array) {
-			assertEquals(lectorSalida.nextLine(), b.toString());
+		for (int i = 0; i < array.length; i+=2) {
+			assertEquals(lectorSalida.nextLine(), array[i].toString());
 			lines++;
 		}
-		
 		assertEquals(lectorSalida.nextLine(), "-----------------------------");
 		lines++;
+		
+		assertEquals(lectorSalida.nextLine(), titulo + ": --------------------");
+		lines++;
+		
+		for (int i = 1; i < array.length; i+=2) {
+			assertEquals(lectorSalida.nextLine(), array[i].toString());
+			lines++;
+		}
+		assertEquals(lectorSalida.nextLine(), "-----------------------------");
+		lines++;
+		
 		lectorSalida.close();
-		assertEquals(array.length+2,lines);
+		assertEquals(array.length+4,lines);
 	}
 	
 	
