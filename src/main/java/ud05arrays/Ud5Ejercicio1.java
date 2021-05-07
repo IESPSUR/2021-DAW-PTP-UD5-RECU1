@@ -144,6 +144,40 @@ public class Ud5Ejercicio1 {
 		return copia;
 	}
 	
+	/**
+	 * Encuentra en el Array los virus que sean igual o más
+	 * peligrosos que el Virus que se pasa como parámetro
+	 * 
+	 * Se considera que un Virus es más peligroso que otro
+	 * usando la relación r0 * letalidad. A mayor Valor, mayor 
+	 * peligrosidad
+	 * 
+	 * @param v
+	 * @return array con los índices de los elementos peligrosos, 
+	 * null si no hay ninguno más peligroso
+	 */
+	public static int [] encuentraPeligrosos(Virus v, Virus[] array) {
+		int [] peligrosos= new int[array.length];
+		int j=0;
+		
+		Float umbral = v.getLetalidad()*v.getR0();
+		
+		for(int i = 0; i<array.length; i++) {
+			if(umbral<=array[i].getLetalidad()*array[i].getR0()) {
+				peligrosos[j++]=i;
+			}
+		}
+		
+		int [] pf = null;
+		if(j>0) {
+			pf=new int[j];
+			//System.arraycopy(peligrosos, 0, pf, 0, j);
+			for(int i=0;i<j;i++)
+				pf[i]=peligrosos[i];
+		}
+		return pf;
+	}
+	
 	
 	
 	

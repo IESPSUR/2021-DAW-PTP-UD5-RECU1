@@ -16,6 +16,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -199,6 +200,12 @@ class MainTest {
 		
 		prohibidoArrays();
 		
+		compruebaEliminadoAleatorio();
+		compruebaEliminadoFijo();
+			
+	}
+	
+	private void compruebaEliminadoAleatorio() {
 		int s = Aleatorios.numeroAleatorio(8, 15);
 		
 		Virus [] array = arrayVirusAleatorio(s);
@@ -229,62 +236,142 @@ class MainTest {
 			else
 				assertTrue(copia[i]==null);
 		}
-		
-		
 	}
 	
+	private void compruebaEliminadoFijo() {
+		
+		Virus [] array = arrayVirusFijoConDuplicados();
+		
+		int num = Aleatorios.numeroAleatorio(0, array.length-3);
+		
+		Virus target = array[num];
+				
+		Virus [] copia = Ud5Ejercicio1.eliminaVirus(target, array);
+		
+		assertNotEquals(copia, array);
+		assertEquals(copia.length,array.length);
+		//List<Virus> list = Arrays.asList(copia);
+		
+		//El elemento se ha eliminado
+		int nulls=0;
+		for (Virus virus : copia) {
+			if(virus!=null)
+				assertTrue(!virus.equals(target));
+			else
+				nulls++;
+		}
+		
+		assertEquals(4, nulls);
+		
+		//La nueva organización interna es correcta
+		for(int i=0;i<copia.length;i++) {
+			if(i<copia.length-nulls)
+				assertTrue(copia[i]!=null);
+			else
+				assertTrue(copia[i]==null);
+		}
+	}
 	
+	@Test
+	@DisplayName("Encuentra Peligrosos")
+	/**
+	 * toString
+	 */
+	void test05() {
+		
+		prohibidoArrays();
+		
+		Virus [] fijo = arrayVirusFijo();
+		
+		//Caso 1
+		Virus muestra = new Virus("indefenso",1,0.00000001f);
+		
+		int [] peligrosos = Ud5Ejercicio1.encuentraPeligrosos(muestra, fijo);
+		
+		assertEquals(fijo.length, peligrosos.length);
+		
+		for(int i=0;i<peligrosos.length;i++)
+			assertEquals(i, peligrosos[i]);
+		
+		//Caso 2
+		muestra = new Virus("Locura",16,1f);
+		
+		peligrosos = Ud5Ejercicio1.encuentraPeligrosos(muestra, fijo);
+		
+		assertTrue(peligrosos==null);
+		
+		//Caso 3
+		muestra = new Virus("Medio",7,0.00015f);
+		
+		peligrosos = Ud5Ejercicio1.encuentraPeligrosos(muestra, fijo);
+		
+		assertEquals(4, peligrosos.length);
+		
+		List<Integer> mp = new LinkedList<Integer>(Arrays.asList(4,2,0,1));
+		
+		for(int i=0;i<peligrosos.length;i++)
+			assertTrue(mp.remove((Integer)peligrosos[i]));
+		
+		assertTrue(mp.isEmpty());
+	}
 
 	@Test
-	@DisplayName("Fibo")
+	@DisplayName("Expresion regular nuevo DNI")
 	/**
 	 * toString
 	 */
-	void test05Fibo() {
-		assertEquals(0,  Ud5Ejercicio2.fibo(0));
-		assertEquals(1,  Ud5Ejercicio2.fibo(1));
-		assertEquals(1,  Ud5Ejercicio2.fibo(2));
-		assertEquals(2,  Ud5Ejercicio2.fibo(3));
-		assertEquals(3,  Ud5Ejercicio2.fibo(4));
-		assertEquals(5,  Ud5Ejercicio2.fibo(5));
+	void test06() {
 		
-		int enesimo = Aleatorios.numeroAleatorio(20, 40);
-		
-		long prev=5;
-		long first=3;
-		long valor=0;
-		for(int i = 6; i <= enesimo;i++) {
-			valor = prev +first;
-			first=prev;
-			prev=valor;
-			
-		}
-		assertEquals(valor,  Ud5Ejercicio2.fibo(enesimo));
+		String er = Ud5Ejercicio2.validaDNI();
+		assertTrue("9876543211AB".matches(er));
+		assertTrue(!"9876543211A".matches(er));
+		assertTrue(!"9876543211A2".matches(er));
+		assertTrue(!"9876543211ABC".matches(er));
+		assertTrue(!"987654321AB".matches(er));
+		assertTrue(!"987654321-AB".matches(er));
+		assertTrue(!"AB".matches(er));
+		assertTrue(!"3216547897".matches(er));
+		assertTrue(!"9876543211aB".matches(er));
+		assertTrue(!"A876543211AB".matches(er));
 	}
 	
 	@Test
-	@DisplayName("Fibonacci")
+	@DisplayName("Valida Enumerado")
 	/**
 	 * toString
 	 */
-	void test06Fibonacci() {
+	void test07() {
 	
-		long [] tab = new long[41];
+		String er = Ud5Ejercicio2.validaCampoEnumerado();
+		assertTrue("perro".matches(er));
+		assertTrue("PERRO".matches(er));
+		assertTrue("gato".matches(er));
+		assertTrue("GATO".matches(er));
+		assertTrue("tortuga".matches(er));
+		assertTrue("TORTUGA".matches(er));
+		assertTrue("loro".matches(er));
+		assertTrue("LORO".matches(er));
 		
+		assertTrue(!"pErro".matches(er));
+		assertTrue(!"PerRO".matches(er));
+		assertTrue(!"gaTo".matches(er));
+		assertTrue(!"GATo".matches(er));
+		assertTrue(!"torTuga".matches(er));
+		assertTrue(!"TOrTUGA".matches(er));
+		assertTrue(!"lOro".matches(er));
+		assertTrue(!"lORO".matches(er));
 		
-		tab[0]=0;
-		assertEquals(1,Ud5Ejercicio2.fibonacci(1).length);
-		assertTrue(Arrays.equals(Ud5Ejercicio2.fibonacci(1), 0,1,tab,0,1));
-		tab[1]=1;
-		assertEquals(2,Ud5Ejercicio2.fibonacci(2).length);
-		assertTrue(Arrays.equals(Ud5Ejercicio2.fibonacci(2), 0,2,tab,0,2));
+		assertTrue(!"coquina".matches(er));
+		assertTrue(!"PERR0".matches(er));
+		assertTrue(!"gaT0".matches(er));
+		assertTrue(!"gatoo".matches(er));
+		assertTrue(!"ttortuga".matches(er));
+		assertTrue(!"TORTUGAS".matches(er));
+		assertTrue(!"loro1".matches(er));
+		assertTrue(!"1LORO".matches(er));
 		
-		for(int i = 2; i < tab.length;i++) { 
-			tab[i] = tab[i-2]+tab[i-1];
-			long [] fiboDev = Ud5Ejercicio2.fibonacci(i);
-			assertEquals(i,fiboDev.length);
-			assertTrue(Arrays.equals(fiboDev, 0,i,tab,0,i));
-		}
+
+		assertTrue(!"".matches(er));
 		
 	}
 	
