@@ -16,7 +16,7 @@ public class Ud5Ejercicio2 {
 	 * @return Expresión regular que valida los requisitos
 	 */
 	public static String validaDNI() {
-		return "^[0-9]{10}[A-Z]{2}$";
+		return null;
 	}
 	
 	/**
@@ -26,13 +26,13 @@ public class Ud5Ejercicio2 {
 	 * PERRO, GATO, TORTUGA, LORO
 	 * 
 	 * La expresión regular debe tener en cuenta dos casos para 
-	 * esos valores. Que la palabra esté entera en mayúsucula.
+	 * esos valores. Que la palabra esté entera en mayúsuculas.
 	 * o entera en minúsculas
 	 * 
 	 * @return Expresión regular que valida los requisitos
 	 */
 	public static String validaCampoEnumerado() {
-		return "(PERRO|GATO|TORTUGA|LORO|perro|gato|tortuga|loro)";
+		return null;
 	}
 
 }
