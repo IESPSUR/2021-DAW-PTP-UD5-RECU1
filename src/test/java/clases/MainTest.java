@@ -13,8 +13,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +32,7 @@ import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaSource;
 
 import clases.helpers.Aleatorios;
+import helpers.Helper;
 import ud05arrays.Bola;
 import ud05arrays.Ud5Ejercicio1;
 import ud05arrays.Ud5Ejercicio2;
@@ -70,11 +73,9 @@ class MainTest {
 	 * toString
 	 */
 	void test01() {
-		//InputStream salida = new ByteArrayInputStream(outputStreamCaptor.toByteArray());
-		//Scanner lectorSalida = new Scanner(salida);
-		//Main.main(null);
-		//assertEquals("Hola Mundo", outputStreamCaptor.toString().trim()/*lectorSalida.nextLine()*/);
-		//lectorSalida.close();
+		
+		prohibidoArrays();
+		
 		int rows= Aleatorios.numeroAleatorio(5, 50);
 		Object [][] datos = arrayVirus(rows); 
 			
@@ -108,7 +109,8 @@ class MainTest {
 	 * toString
 	 */
 	void test02() {
-		
+
+		prohibidoArrays();
 
 		int s = Aleatorios.numeroAleatorio(8, 15);
 		Virus [] array = new Virus[s];
@@ -151,29 +153,40 @@ class MainTest {
 	
 	
 	@Test
-	@DisplayName("Orden Desdendente")
+	@DisplayName("Orden Ascendente")
 	/**
 	 * toString
 	 */
-	void test03OrdenDescendente() {
+	void test03() {
 		
 		prohibidoArrays();
 
 		int s = Aleatorios.numeroAleatorio(8, 15);
-		Bola [] array = new Bola[s];
 		
-		for (int i = 0; i < array.length; i++)
-			array[i]=new Bola(Aleatorios.numeroAleatorio(1f, 9f),Aleatorios.numeroAleatorio(1f, 9f));
+		Virus [] array = arrayVirusAleatorio(s);
+				
+		Virus [] b = array.clone();
 		
-		Bola [] b = array.clone();
-		
-		Bola [] ordenado = Ud5Ejercicio1.ordena(array);
+		Virus [] ordenado = Ud5Ejercicio1.ordena(array);
 		//El contenido de array no ha sido modificado
 		assertTrue(Arrays.deepEquals(b, array));
 		//El array devuelto es diferente
 		assertNotEquals(ordenado, array);
 		//El array está ordenado
-		Arrays.sort(b, Collections.reverseOrder());
+		Arrays.sort(b);
+		assertTrue(Arrays.deepEquals(ordenado, b));
+		
+		array = arrayVirusFijo();
+		
+		b= array.clone();
+		
+		ordenado = Ud5Ejercicio1.ordena(array);
+		//El contenido de array no ha sido modificado
+		assertTrue(Arrays.deepEquals(b, array));
+		//El array devuelto es diferente
+		assertNotEquals(ordenado, array);
+		//El array está ordenado
+		Arrays.sort(b);
 		assertTrue(Arrays.deepEquals(ordenado, b));
 	}
 	
@@ -182,60 +195,44 @@ class MainTest {
 	/**
 	 * toString
 	 */
-	void test04EliminaBolas() {
+	void test04() {
 		
 		prohibidoArrays();
 		
 		int s = Aleatorios.numeroAleatorio(8, 15);
-		Bola [] array = new Bola[s+3];
 		
-		Bola otra = new Bola(3f,3f);
-		array[0]=otra;
-		for (int i = 1; i < array.length-2; i++)
-			array[i]=new Bola(Aleatorios.numeroAleatorio(1f, 9f),Aleatorios.numeroAleatorio(1f, 9f));
+		Virus [] array = arrayVirusAleatorio(s);
 		
-		array[array.length-2]=otra;
-		array[array.length-1]=otra;
+		int num = Aleatorios.numeroAleatorio(0, s);
 		
-		Bola [] b = array.clone();
+		Virus target = array[num];
+				
+		Virus [] copia = Ud5Ejercicio1.eliminaVirus(target, array);
 		
-		eliminaElemento(3f, 3f, b);
+		assertNotEquals(copia, array);
+		assertEquals(copia.length,array.length);
+		//List<Virus> list = Arrays.asList(copia);
 		
-		int elementoAleatorio = Aleatorios.numeroAleatorio(0, array.length-1);
+		//El elemento se ha eliminado
+		int nulls=0;
+		for (Virus virus : copia) {
+			if(virus!=null)
+				assertTrue(!virus.equals(target));
+			else
+				nulls++;
+		}
 		
-		Bola bola2 = array[elementoAleatorio];
+		//La nueva organización interna es correcta
+		for(int i=0;i<copia.length;i++) {
+			if(i<copia.length-nulls)
+				assertTrue(copia[i]!=null);
+			else
+				assertTrue(copia[i]==null);
+		}
 		
-		eliminaElemento(bola2.getDiametro(), bola2.getPeso(), b);
+		
 	}
 	
-	void eliminaElemento(float diametro, float peso, Bola[]array) {
-		
-		Bola otra = new Bola(diametro, peso);
-        Bola [] b = array.clone();
-		
-		int  cuenta = 0;
-		
-		for(Bola pru: array) {
-			if(pru.equals(otra))
-				cuenta++;
-		}
-		
-		Bola [] eliminacion1 = Ud5Ejercicio1.eliminaBolas(diametro, peso, array);
-		//El contenido de array no ha sido modificado
-		assertTrue(Arrays.deepEquals(b, array));
-		//El array devuelto es diferente
-		assertNotEquals(eliminacion1, array);
-		//La longitud del array devuelto es coherente
-		assertEquals(array.length - cuenta, eliminacion1.length);
-		//Comprobar que el eliminado no esta
-		Arrays.sort(eliminacion1);
-		assertTrue(Arrays.binarySearch(eliminacion1, otra)<0);
-		//Comprobar  que los no eliminados estan
-		for(Bola ref: array) {
-			if(!ref.equals(otra))
-				assertTrue(Arrays.binarySearch(eliminacion1, ref)>=0);
-		}
-	}
 	
 
 	@Test
@@ -333,6 +330,51 @@ class MainTest {
         	print("Prohibido referenciar " + classForbidden + " en la clase " + classFullPath );
         	assertTrue(false);
         }
+	}
+	
+	private Virus[] arrayVirusAleatorio(int rows) {
+		Object [][] datos = arrayVirus(rows); 
+			
+		Virus [] array = new Virus[rows];
+				
+		for(int i=0;i<datos.length;i++) {
+			Object [] fs = datos[i];
+			Virus ref = new Virus((String)fs[0],(Integer)fs[1],(Float)fs[2]);
+			array[i]=ref;
+		}
+		
+		return array;
+	}
+	
+	private Virus[] arrayVirusFijo() {			
+		Virus [] array = new Virus[5];
+		int i=0;
+		array[i++]= new Virus("Coronavirus",3,0.125f);
+		array[i++]= new Virus("Sarampión",12,0.0001f);
+		array[i++]= new Virus("Viruela", 7,0.00015f);
+		array[i++]= new Virus("Paperas",4,0.00001f);
+		array[i++]= new Virus("Ébola",2,0.199f);
+		
+		return array;
+	}
+	
+	private Virus[] arrayVirusFijoConDuplicados() {			
+		Virus [] array = new Virus[12];
+		int i=0;
+		array[i++]= new Virus("Coronavirus",3,0.125f);
+		array[i++]= new Virus("Sarampión",12,0.0001f);
+		array[i++]= new Virus("Viruela", 7,0.00015f);
+		array[i++]= new Virus("Paperas",4,0.00001f);
+		array[i++]= new Virus("Ébola",2,0.199f);
+		array[i++]= new Virus("Coronavirus",3,0.125f);
+		array[i++]= new Virus("Sarampión",12,0.0001f);
+		array[i++]= new Virus("Viruela", 7,0.00015f);
+		array[i++]= new Virus("Paperas",4,0.00001f);
+		array[i++]= new Virus("Ébola",2,0.199f);
+		array[i++]=null;
+		array[i++]=null;
+		
+		return array;
 	}
 	
 	void print(Object message) {

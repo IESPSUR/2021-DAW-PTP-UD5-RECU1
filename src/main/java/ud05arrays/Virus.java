@@ -58,7 +58,7 @@ public class Virus implements Comparable<Virus>{
 	@Override
 	public int compareTo(Virus v) {
 		int compare = r0 - v.r0;
-		compare += compare==0 ? compare : letalidad-v.letalidad;
+		compare += compare==0 ? letalidad-v.letalidad : compare;
 		return compare;
 	}
 

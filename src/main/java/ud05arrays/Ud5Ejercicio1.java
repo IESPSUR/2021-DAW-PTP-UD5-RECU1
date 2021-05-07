@@ -3,6 +3,9 @@
  */
 package ud05arrays;
 
+
+import helpers.Helper;
+
 /**
  * @author eserrano
  *
@@ -23,15 +26,12 @@ public class Ud5Ejercicio1 {
 		
 		Virus[] arrayVirus = crearArrayVirus(datosVirus);
 		
-		imprimeVirus(arrayVirus,"Inicial",true);
+		imprimeVirus(arrayVirus,"Pares",true);
+		imprimeVirus(arrayVirus,"Impares",false);
 		
-		imprimeVirus(arrayVirus,"Inicial",false);
-//		
-//		Bola [] ordenado = ordena(bolas);
-//		
-//		imprimeBolas(ordenado, "Ordenado");
-//		
-//		Bola [] limpio = eliminaBolas(5f, 5f, bolas);
+		Virus [] ordenado = ordena(arrayVirus);
+		
+		Virus [] limpio = eliminaVirus(ordenado[0], ordenado);
 //		
 //		imprimeBolas(limpio,"Limpio");
 	}
@@ -89,7 +89,7 @@ public class Ud5Ejercicio1 {
 	/**
 	 * El metodo ordena UNA COPIA del array que se pasa como parametro
 	 * 
-	 * El orden ha de ser DESCENDENTE, De Mayor a menor
+	 * El orden ha de ser ASCENDENTE, De Mayor a menor
 	 * 
 	 * RECUERDA QUE EL METODO TRABAJA SOBRE UNA COPIA
 	 * NO DEBE MODIFICAR EL ARRAY ORIGINAL.
@@ -98,28 +98,50 @@ public class Ud5Ejercicio1 {
 	 * @param array A clonar y ordenar
 	 * @return copia ordenada del array pasado como parametro
 	 */
-	public static Bola[] ordena(final Bola[] array) {
-		
-		return null;
+	public static Virus[] ordena(final Virus[] array) {
+		Virus [] ordenado = array.clone();
+		for(int i = ordenado.length-1;i>0;i--) {
+			for(int j=0;j<i;j++) {
+				if(ordenado[j].compareTo(ordenado[j+1])>0)
+					Helper.swap(ordenado, j, j+1);
+			}
+		}
+		return ordenado;
 	}
 	
 	/**
-	 * Elimina todas las veces que aparece la bola en un array.
+	 * Elimina todas las veces que aparece un Virus en un Array.
 	 * 
-	 * Debe devolver un nuevo arrar mas pequeño que se ajuste
-	 * perfectamente a los elementos que quedan tras la eliminacion
+	 * Debe devolver un nuevo array que contiene de forma consecutiva todos
+	 * los elementos que no se han eliminado en las primeras posiciones.
+	 * En las últimas posiciones del array quedarán los huecos nulos
+	 * pertenecientes a las eliminaciones producidas
+	 * 
+	 * Ejemplo:
+	 * 
+	 * Eliminar 3 en [6,5,1,8,3,9,9,3,2,null,null]
+	 * Debe devolver: [6,5,1,8,9,9,2,null,null,null,null]
 	 * 
 	 * RECUERDA QUE EL METODO TRABAJA SOBRE UNA COPIA
 	 * NO DEBE MODIFICAR EL ARRAY ORIGINAL.
 	 * PISTA: Clona el array antes de eliminar.
 	 * 
-	 * @param diametro del elemento a borrar
-	 * @param peso del elemento a borrar
-	 * @param array array que se clonara y del que se borrara
-	 * @return nuevo array con los elementos no eliminados.
+	 * @param Virus de muestra a borrar
+	 * @return nuevo array sin los eliminados.
 	 */
-	public static Bola[] eliminaBolas(float diametro, float peso,final Bola[] array) {
-		return null;
+	public static Virus[] eliminaVirus(Virus v,final Virus[] array) {
+		Virus [] copia = new Virus[array.length];
+		
+		int j=0;
+		for(int i=0;i<array.length;i++) {
+			if(array[i]!=null && !array[i].equals(v))
+				copia[j++]=array[i];
+		}
+		
+		while(j<copia.length)
+			copia[j++]=null;
+		
+		return copia;
 	}
 	
 	

@@ -2,6 +2,10 @@ package ud05arrays;
 
 public class Ud5Ejercicio2 {
 
+	//https://www.discoduroderoer.es/ejercicios-propuestos-y-resueltos-expresiones-regulares-en-java/
+	//DNI con 10 digitos y 2Letras
+	//Fecha formato yyyy>mm>dd
+	
 	/**
 	 * Crea un programa que dado un numero N, que se recibe como parametro a traves
 	 * de String[] args genere un array de enteros con los N primeros terminos de la sucesion
