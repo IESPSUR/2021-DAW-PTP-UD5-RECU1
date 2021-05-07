@@ -31,4 +31,4 @@ Tocar ficheros diferentes a los especificados impedir&aacute; la correcci&oacute
 4. Ud5Ejercicio1.eliminaBolas -> test04 **2 pt.**
 4. Ud5Ejercicio1.encuentraPeligrosos -> test05 **2 pt.**
 5. Ud5Ejercicio2.newdni -> test06 **1 pt.**
-6. Ud5Ejercicio2.enumerado -> test04 **1 pt.**
+6. Ud5Ejercicio2.enumerado -> test07 **1 pt.**
