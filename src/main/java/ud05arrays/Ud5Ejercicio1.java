@@ -4,8 +4,6 @@
 package ud05arrays;
 
 
-import helpers.Helper;
-
 /**
  * @author eserrano
  *
@@ -29,11 +27,6 @@ public class Ud5Ejercicio1 {
 		imprimeVirus(arrayVirus,"Pares",true);
 		imprimeVirus(arrayVirus,"Impares",false);
 		
-		Virus [] ordenado = ordena(arrayVirus);
-		
-		Virus [] limpio = eliminaVirus(ordenado[0], ordenado);
-//		
-//		imprimeBolas(limpio,"Limpio");
 	}
 	
 	/**
@@ -48,15 +41,7 @@ public class Ud5Ejercicio1 {
 	 * @return Nuevo array con los Virus creados.
 	 */
 	public static Virus[] crearArrayVirus(Object[][] datosVirus) {
-		Virus [] array = new Virus[datosVirus.length];
-		int i=0;
-		for (Object[] objects : datosVirus) {
-			String nombre = (String)objects[0];
-			Integer r0=(Integer)objects[1];
-			Float letalidad=(Float)objects[2];
-			array[i++]=new Virus(nombre, r0, letalidad);
-		}
-		return array;
+		return null;
 	}
 	
 
@@ -78,10 +63,7 @@ public class Ud5Ejercicio1 {
 	public static void imprimeVirus(Virus[] array, String titulo, boolean pares) {
 		System.out.println(titulo + ": --------------------");
 		
-		int inicio = pares ? 0 : 1;
-		for (int i = inicio; i < array.length; i+=2) {
-			System.out.println(array[i]);
-		}
+		//TODO Insertar solucion aquí
 		
 		System.out.println("-----------------------------");
 	}
@@ -99,14 +81,7 @@ public class Ud5Ejercicio1 {
 	 * @return copia ordenada del array pasado como parametro
 	 */
 	public static Virus[] ordena(final Virus[] array) {
-		Virus [] ordenado = array.clone();
-		for(int i = ordenado.length-1;i>0;i--) {
-			for(int j=0;j<i;j++) {
-				if(ordenado[j].compareTo(ordenado[j+1])>0)
-					Helper.swap(ordenado, j, j+1);
-			}
-		}
-		return ordenado;
+		return null;
 	}
 	
 	/**
@@ -130,18 +105,7 @@ public class Ud5Ejercicio1 {
 	 * @return nuevo array sin los eliminados.
 	 */
 	public static Virus[] eliminaVirus(Virus v,final Virus[] array) {
-		Virus [] copia = new Virus[array.length];
-		
-		int j=0;
-		for(int i=0;i<array.length;i++) {
-			if(array[i]!=null && !array[i].equals(v))
-				copia[j++]=array[i];
-		}
-		
-		while(j<copia.length)
-			copia[j++]=null;
-		
-		return copia;
+		return null;
 	}
 	
 	/**
@@ -157,25 +121,7 @@ public class Ud5Ejercicio1 {
 	 * null si no hay ninguno más peligroso
 	 */
 	public static int [] encuentraPeligrosos(Virus v, Virus[] array) {
-		int [] peligrosos= new int[array.length];
-		int j=0;
-		
-		Float umbral = v.getLetalidad()*v.getR0();
-		
-		for(int i = 0; i<array.length; i++) {
-			if(umbral<=array[i].getLetalidad()*array[i].getR0()) {
-				peligrosos[j++]=i;
-			}
-		}
-		
-		int [] pf = null;
-		if(j>0) {
-			pf=new int[j];
-			//System.arraycopy(peligrosos, 0, pf, 0, j);
-			for(int i=0;i<j;i++)
-				pf[i]=peligrosos[i];
-		}
-		return pf;
+		return null;
 	}
 	
 	
