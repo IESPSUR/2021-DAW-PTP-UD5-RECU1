@@ -28,7 +28,7 @@ Tocar ficheros diferentes a los especificados impedir&aacute; la correcci&oacute
 1. Ud5Ejercicio1.crear -> test01 **1,5 pt.**
 2. Ud5Ejercicio1.imprimeParesImpares -> test02 **1 pt.**
 3. Ud5Ejercicio1.ordena -> test03 **1,5 pt.**
-4. Ud5Ejercicio1.eliminaBolas -> test04 **2 pt.**
+4. Ud5Ejercicio1.eliminaVirus -> test04 **2 pt.**
 4. Ud5Ejercicio1.encuentraPeligrosos -> test05 **2 pt.**
 5. Ud5Ejercicio2.newdni -> test06 **1 pt.**
 6. Ud5Ejercicio2.enumerado -> test07 **1 pt.**

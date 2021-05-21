@@ -21,6 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.MethodName;
@@ -165,6 +166,7 @@ class MainTest {
 		Virus [] b = array.clone();
 		
 		Virus [] ordenado = Ud5Ejercicio1.ordena(array);
+		Assertions.assertNotNull(ordenado);
 		//El contenido de array no ha sido modificado
 		assertTrue(Arrays.deepEquals(b, array));
 		//El array devuelto es diferente
@@ -177,6 +179,7 @@ class MainTest {
 		b= array.clone();
 		
 		ordenado = Ud5Ejercicio1.ordena(array);
+		Assertions.assertNotNull(ordenado);
 		//El contenido de array no ha sido modificado
 		assertTrue(Arrays.deepEquals(b, array));
 		//El array devuelto es diferente
