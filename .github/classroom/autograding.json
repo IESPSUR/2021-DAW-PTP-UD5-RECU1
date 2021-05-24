@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "Crear",
+      "setup": "",
+      "run": "gradle test --tests MainTest.test01",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Imprime",
+      "setup": "",
+      "run": "gradle test --tests MainTest.test02",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Ordena",
+      "setup": "",
+      "run": "gradle test --tests MainTest.test03",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Elimina",
+      "setup": "",
+      "run": "gradle test --tests MainTest.test04",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Encuentra",
+      "setup": "",
+      "run": "gradle test --tests MainTest.test05",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Patron DNI",
+      "setup": "",
+      "run": "gradle test --tests MainTest.test06",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Patrón enumerado",
+      "setup": "",
+      "run": "gradle test --tests MainTest.test07",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    }
+  ]
+}

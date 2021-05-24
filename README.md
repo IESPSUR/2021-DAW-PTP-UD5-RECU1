@@ -1,4 +1,4 @@
-![Java CI](../../workflows/Java%20CI/badge.svg)
+![Java CI](../../workflows/Java%20CI/badge.svg) ![Points badge](../../blob/badges/.github/badges/points.svg)
 
 # Prueba Te&oacute;rico Pr&aacute;ctica UD5 - Arrays
 
