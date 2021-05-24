@@ -45,6 +45,14 @@ jobs:
           #     name: badge
           #     path: '.github/badges/points.svg'
           #     if-no-files-found: error
+          
+       
+      - name: Delete branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+         github_token: ${{github.token}}
+         soft_fail: true
+         branches: badges
 
       # commit and push badge if score has changed
       - name: Commit badge
