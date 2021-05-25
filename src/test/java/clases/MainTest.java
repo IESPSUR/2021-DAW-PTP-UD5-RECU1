@@ -13,9 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,8 +31,6 @@ import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaSource;
 
 import clases.helpers.Aleatorios;
-import helpers.Helper;
-import ud05arrays.Bola;
 import ud05arrays.Ud5Ejercicio1;
 import ud05arrays.Ud5Ejercicio2;
 import ud05arrays.Virus;
@@ -174,8 +170,7 @@ class MainTest {
 		//El array devuelto es diferente
 		assertNotEquals(ordenado, array);
 		//El array está ordenado
-		Arrays.sort(b);
-		assertTrue(Arrays.deepEquals(ordenado, b));
+		assertTrue(isOrdered(ordenado, true) || isOrdered(ordenado, false));
 		
 		array = arrayVirusFijo();
 		
@@ -187,8 +182,21 @@ class MainTest {
 		//El array devuelto es diferente
 		assertNotEquals(ordenado, array);
 		//El array está ordenado
-		Arrays.sort(b);
-		assertTrue(Arrays.deepEquals(ordenado, b));
+		assertTrue(isOrdered(ordenado, true) || isOrdered(ordenado, false));
+	}
+	
+	boolean isOrdered(Comparable [] array, boolean ascending) {
+		if(array!=null && array.length>1) {
+			for (int i = 0; i < array.length-1; i++) {
+				if(ascending && array[i].compareTo(array[i+1])>0)
+					return false;
+				else if(!ascending && array[i].compareTo(array[i+1])<0)
+	
+					return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	@Test
