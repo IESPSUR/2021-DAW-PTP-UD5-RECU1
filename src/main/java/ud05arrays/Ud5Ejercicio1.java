@@ -71,7 +71,7 @@ public class Ud5Ejercicio1 {
 	/**
 	 * El metodo ordena UNA COPIA del array que se pasa como parametro
 	 * 
-	 * El orden ha de ser ASCENDENTE, De menor a mayor
+	 * El orden ha de ser ASCENDENTE, De Menor a Mayor
 	 * 
 	 * RECUERDA QUE EL METODO TRABAJA SOBRE UNA COPIA
 	 * NO DEBE MODIFICAR EL ARRAY ORIGINAL.
