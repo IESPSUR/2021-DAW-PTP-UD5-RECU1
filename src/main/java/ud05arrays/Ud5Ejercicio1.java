@@ -89,7 +89,7 @@ public class Ud5Ejercicio1 {
 	/**
 	 * El metodo ordena UNA COPIA del array que se pasa como parametro
 	 * 
-	 * El orden ha de ser ASCENDENTE, De Mayor a menor
+	 * El orden ha de ser ASCENDENTE, De menor a mayor
 	 * 
 	 * RECUERDA QUE EL METODO TRABAJA SOBRE UNA COPIA
 	 * NO DEBE MODIFICAR EL ARRAY ORIGINAL.
@@ -99,27 +99,14 @@ public class Ud5Ejercicio1 {
 	 * @return copia ordenada del array pasado como parametro
 	 */
 	public static Virus[] ordena(final Virus[] array) {
-//		Virus [] ordenado = array.clone();
-//		for(int i = ordenado.length-1;i>0;i--) {
-//			for(int j=0;j<i;j++) {
-//				if(ordenado[j].compareTo(ordenado[j+1])>0)
-//					Helper.swap(ordenado, j, j+1);
-//			}
-//		}
-//		return ordenado;
-		
-		Virus[] copiaArray = array.clone();
-		
-		for (int i = 0; i < copiaArray.length; i++) {
-			
-			for (int j = i + 1; j < copiaArray.length; j++) {
-				
-				if(copiaArray[i].compareTo(copiaArray[j])<0) {
-					Helper.swap(copiaArray, j, i);
-				}
+		Virus [] ordenado = array.clone();
+		for(int i = ordenado.length-1;i>0;i--) {
+			for(int j=0;j<i;j++) {
+				if(ordenado[j].compareTo(ordenado[j+1])>0)
+					Helper.swap(ordenado, j, j+1);
 			}
 		}
-		return copiaArray;
+		return ordenado;
 	}
 	
 	/**

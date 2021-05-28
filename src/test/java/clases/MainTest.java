@@ -170,7 +170,7 @@ class MainTest {
 		//El array devuelto es diferente
 		assertNotEquals(ordenado, array);
 		//El array está ordenado
-		assertTrue(isOrdered(ordenado, true) || isOrdered(ordenado, false));
+		assertTrue(isOrdered(ordenado, true));
 		
 		array = arrayVirusFijo();
 		
@@ -182,7 +182,7 @@ class MainTest {
 		//El array devuelto es diferente
 		assertNotEquals(ordenado, array);
 		//El array está ordenado
-		assertTrue(isOrdered(ordenado, true) || isOrdered(ordenado, false));
+		assertTrue(isOrdered(ordenado, true));
 	}
 	
 	boolean isOrdered(Comparable [] array, boolean ascending) {
@@ -191,7 +191,6 @@ class MainTest {
 				if(ascending && array[i].compareTo(array[i+1])>0)
 					return false;
 				else if(!ascending && array[i].compareTo(array[i+1])<0)
-	
 					return false;
 			}
 		}
